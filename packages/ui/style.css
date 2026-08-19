@@ -1,0 +1,158 @@
+:root {
+  --light-color: var(--color-mist-200);
+  --medium-color: var(--color-mist-300);
+  --dark-color: var(--color-mist-400);
+  --default-text-color: var(--color-mist-950);
+}
+
+@variant dark {
+  :root {
+    --light-color: var(--color-mist-700);
+    --medium-color: var(--color-mist-800);
+    --dark-color: var(--color-mist-900);
+    --default-text-color: var(--color-mist-300);
+  }
+}
+
+@theme {
+  --color-txt: var(--default-text-color);
+  --color-light: var(--light-color);
+  --color-mid: var(--medium-color);
+  --color-dark: var(--dark-color);
+}
+
+
+@layer base {
+  html,
+  body {
+    @apply bg-light text-txt [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden;
+  }
+  nav {
+    @apply flex justify-between items-center;
+    @apply bg-mid;
+    @apply border-b border-dark;
+    @apply shadow-md shadow-mid;
+    
+    & .title {
+      @apply text-4xl font-thin;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    @apply border border-dark rounded-2xl p-4 shadow-md shadow-mid;
+
+    & .title {
+      @apply flex justify-between items-center;
+    }
+
+    & .footer {
+      @apply flex justify-between mt-auto;
+    }
+  }
+
+  .badge {
+    @apply border-2 rounded-full px-4 py-1 text-xs;
+
+    &.primary {
+      @apply bg-blue-200 border-blue-400 text-blue-400;
+    }
+
+    &.secondary {
+      @apply bg-gray-200 border-gray-400 text-gray-400;
+    }
+
+    &.success {
+      @apply bg-emerald-200 border-emerald-400 text-emerald-400;
+    }
+
+    &.caution {
+      @apply bg-yellow-200 border-yellow-400 text-yellow-400;
+    }
+
+    &.warning {
+      @apply bg-orange-200 border-orange-400 text-orange-400;
+    }
+
+    &.info {
+      @apply bg-sky-200 border-sky-400 text-sky-400;
+    }
+
+    &.update {
+      @apply bg-purple-200 border-purple-400 text-purple-400;
+    }
+
+    &.danger {
+      @apply bg-red-200 border-red-400 text-red-400;
+    }
+  }
+
+  .btn {
+    @apply flex justify-center m-4 text-lg p-4 text-center items-center rounded-2xl cursor-pointer;
+
+    &.primary {
+      @apply bg-blue-400 hover:bg-blue-500 text-white;
+
+      &.outlined {
+        @apply bg-transparent border border-blue-400 hover:bg-blue-300 text-blue-400 font-semibold;
+      }
+    }
+
+    &.secondary {
+      @apply bg-gray-400 hover:bg-gray-500 text-white;
+
+      &.outlined {
+        @apply bg-transparent border border-gray-400 hover:bg-gray-300 text-gray-400 font-semibold;
+      }
+    }
+
+    &.success {
+      @apply bg-emerald-400 hover:bg-emerald-500 text-white;
+
+      &.outlined {
+        @apply bg-transparent border border-emerald-400 hover:bg-emerald-300 text-emerald-400 font-semibold;
+      }
+    }
+
+    &.caution {
+      @apply bg-yellow-400 hover:bg-yellow-500 text-white;
+
+      &.outlined {
+        @apply bg-transparent border border-yellow-400 hover:bg-yellow-300 text-yellow-400 font-semibold;
+      }
+    }
+
+    &.warning {
+      @apply bg-orange-400 hover:bg-orange-500 text-white;
+
+      &.outlined {
+        @apply bg-transparent border border-orange-400 hover:bg-orange-300 text-orange-400 font-semibold;
+      }
+    }
+
+    &.info {
+      @apply bg-sky-400 hover:bg-sky-500 text-white;
+
+      &.outlined {
+        @apply bg-transparent border border-sky-400 hover:bg-sky-300 text-sky-400 font-semibold;
+      }
+    }
+
+    &.update {
+      @apply bg-purple-400 hover:bg-purple-500 text-white;
+
+      &.outlined {
+        @apply bg-transparent border border-purple-400 hover:bg-purple-300 text-purple-400 font-semibold;
+      }
+    }
+
+    &.danger {
+      @apply bg-red-400 hover:bg-red-500 text-white;
+
+      &.outlined {
+        @apply bg-transparent border border-red-400 hover:bg-red-300 text-red-400 font-semibold;
+      }
+    }
+  }
+}
