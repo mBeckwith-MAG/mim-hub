@@ -31,3 +31,8 @@ export type Attachment = {
   url: string
   name: string
 }
+
+export interface ColorKeyGuide {
+    color: string
+    label: string
+}

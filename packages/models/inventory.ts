@@ -1,5 +1,5 @@
-import type { ColVal, Item } from './types'
-import { Columns } from './constants'
+import type { ColVal, Item } from '@mim-workspace/types'
+import { Columns } from '@mim-workspace/constants'
 
 type AllColumnKeys = keyof typeof Columns
 type DynamicColumnKeys = Exclude<AllColumnKeys, 'STOCK_NUMBER' | 'UID'>

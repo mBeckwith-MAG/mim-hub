@@ -1,5 +1,5 @@
 <template>
-  <Card separated>
+  <Card separated :class="statusBorder">
     <template #title>
       <div class="grid gap-1">
         <div class="text-2xl">{{ item.stock_number }}</div>
@@ -23,7 +23,7 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { InventoryItem } from '../utilities/models'
+import type { InventoryItem } from '@mim-workspace/models'
 import DataDisplay from '@mim-workspace/ui/Components/DataDisplay.vue';
 const props = defineProps<{
   item: InventoryItem
@@ -52,5 +52,16 @@ const itemData = computed(() => {
       value: entry[1].text
     }
   })
+})
+
+const statusBorder = computed(() => {
+  const status = props.item.status.text
+  const base_style = 'border-l-20'
+
+  if(status?.includes('Working')) return `${base_style} border-l-yellow-500`
+  if(status?.includes('Reject')) return `${base_style} border-l-red-500`
+  if(status?.includes('Missing')) return `${base_style} border-l-purple-500`
+  if(status?.includes('Done')) return `${base_style} border-l-emerald-500`
+  return `${base_style} border-l-gray-500`
 })
 </script>

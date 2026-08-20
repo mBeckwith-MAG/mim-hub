@@ -1,0 +1,5 @@
+{
+  "name": "@mim-workspace/tailwind",
+  "version": "1.0.0",
+  "main": "./base.config.ts"
+}

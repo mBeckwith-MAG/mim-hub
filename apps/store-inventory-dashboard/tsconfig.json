@@ -3,5 +3,17 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@mim-workspace/ui": ["../../packages/ui/index.ts"],
+      "@mim-workspace/ui/*": ["../../packages/ui/*"],
+      "@mim-workspace/constants": ["../../packages/constants/index.ts"],
+      "@mim-workspace/constants/*": ["../../packages/constants/*"],
+      "@mim-workspace/models": ["../../packages/models/index.ts"],
+      "@mim-workspace/models/*": ["../../packages/models/*"],
+      "@mim-workspace/types": ["../../packages/types/index.ts"],
+      "@mim-workspace/types/*": ["../../packages/types/*"]
+    }
+  }
 }

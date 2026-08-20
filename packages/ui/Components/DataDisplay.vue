@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="text-center">
         <div class="truncate">{{ value }}</div>
         <small>{{ label.toUpperCase() }}</small>
     </div>

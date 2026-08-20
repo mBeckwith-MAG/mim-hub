@@ -1,5 +1,5 @@
 {
-  "name": "store-inventory-dashboard",
+  "name": "accounting-inventory-widget",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,13 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@iconify/vue": "^5.0.1",
-    "@mim-workspace/constants": "workspace:*",
-    "@mim-workspace/models": "workspace:*",
-    "@mim-workspace/types": "workspace:*",
-    "@mim-workspace/ui": "workspace:*",
-    "vue": "^3.5.40",
-    "vue-router": "^5.2.0"
+    "vue": "^3.5.40"
   },
   "devDependencies": {
     "@mim-workspace/tailwind": "workspace:*",
