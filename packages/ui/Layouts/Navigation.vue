@@ -23,9 +23,12 @@
   </nav>
 </template>
 <script setup lang="ts">
-withDefaults(defineProps<{
-  shadowed?: boolean
-}>(), {
-  shadowed: false
-})
+withDefaults(
+  defineProps<{
+    shadowed?: boolean;
+  }>(),
+  {
+    shadowed: false,
+  }
+);
 </script>

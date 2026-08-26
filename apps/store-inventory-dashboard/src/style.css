@@ -1,5 +1,4 @@
-@import "tailwindcss";
-@import "../../../packages/ui/style.css";
+@import 'tailwindcss';
+@import '../../../packages/ui/style.css';
 
 @source "../../../packages/ui/**/*.vue";
-

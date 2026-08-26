@@ -1,9 +1,10 @@
-export const BASE_URL = 'https://live1-service-32093452-c0a7fb28.us.monday.app/api'
+export const BASE_URL =
+  'https://live1-service-32093452-c0a7fb28.us.monday.app/api';
 export const BOARDS = {
   currentItems: 18423287724,
   previousItems: 18423287721,
   printingItems: 18423287720,
-}
+};
 
 export const Stores = [
   {
@@ -66,7 +67,7 @@ export const Stores = [
     name: 'Wesley Chapel Nissan',
     abbr: 'WCN',
   },
-]
+];
 
 export const CurrentBoardColumns = {
   priority: 'color_mm1rnnyt',
@@ -99,8 +100,8 @@ export const CurrentBoardColumns = {
   vendor_created: 'boolean_mm3cp6sg',
   reversal: 'boolean_mm29gzzj',
   subtasks: 'subtasks_mm0zvda4',
-  unknown: 'direct_doc_mm3ybvt6'
-}
+  unknown: 'direct_doc_mm3ybvt6',
+};
 
 export const PreviousBoardColumns = {
   priority: 'color_mm1rnnyt',
@@ -134,8 +135,8 @@ export const PreviousBoardColumns = {
   reversal: 'boolean_mm29gzzj',
   subtasks: 'subtasks_mm0zvda4',
   assigned_printer: 'multiple_person_mm4eq84q',
-  unknown: 'direct_doc_mm3ybvt6'
-}
+  unknown: 'direct_doc_mm3ybvt6',
+};
 
 export const PrintingBoardColumns = {
   priority: 'color_mm1rnnyt',
@@ -169,32 +170,16 @@ export const PrintingBoardColumns = {
   reversal: 'boolean_mm29gzzj',
   subtasks: 'subtasks_mm0zvda4',
   unknown: 'direct_doc_mm3ybvt6',
-  inventory_clerk: 'multiple_person_mm4e1zwh'
-}
+  inventory_clerk: 'multiple_person_mm4e1zwh',
+};
 
-export const carTypeOptions = [
-  'New',
-  'Used'
-]
+export const carTypeOptions = ['New', 'Used'];
 
-export const priorityOptions = [
-  'Low',
-  'Medium',
-  'High',
-  'Critical ⚠️️'
-]
+export const priorityOptions = ['Low', 'Medium', 'High', 'Critical ⚠️️'];
 
-export const statusOptions = [
-  'Working',
-  'Reject',
-  'Done'
-]
+export const statusOptions = ['Working', 'Reject', 'Done'];
 
-export const newOriginOptions = [
-  'Factory',
-  'Dealer trade',
-  'Ground Loaner'
-]
+export const newOriginOptions = ['Factory', 'Dealer trade', 'Ground Loaner'];
 
 export const usedOriginOptions = [
   'Grounded Loaner',
@@ -205,14 +190,11 @@ export const usedOriginOptions = [
   'Pre-Trade',
   'Street Purchase',
   'Wholesale/Auction Purchase',
-  'Wholesale/Auction Sale'
-]
+  'Wholesale/Auction Sale',
+];
 
-export const titleOrPayoffOptions = [
-  'Title',
-  'Payoff'
-]
+export const titleOrPayoffOptions = ['Title', 'Payoff'];
 
-export const SaleOptions = ['Single', 'Bulk']
-export const TitleOptions = ['Paper', 'EFT', 'OOS']
-export const PurchaseOptions = [...SaleOptions, 'Dealshield', 'Enterprise']
+export const SaleOptions = ['Single', 'Bulk'];
+export const TitleOptions = ['Paper', 'EFT', 'OOS'];
+export const PurchaseOptions = [...SaleOptions, 'Dealshield', 'Enterprise'];

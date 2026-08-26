@@ -1,44 +1,44 @@
 export interface ColVal {
-  id: string
-  text: string | null
-  value: string | null
+  id: string;
+  text: string | null;
+  value: string | null;
 }
 
 export interface Item {
-  id: string
-  name: string
-  column_values: Array<ColVal>
+  id: string;
+  name: string;
+  column_values: Array<ColVal>;
 }
 
 export interface RawFile {
-  ui: string
-  file: File
-  preview: string
+  ui: string;
+  file: File;
+  preview: string;
 }
 
 export type RawFiles = {
-  files: Array<FileData>
-}
+  files: Array<FileData>;
+};
 
 export type FileData = {
-  name: string
-  assetId: number
-  isImage: boolean
-  fileType: string
-}
+  name: string;
+  assetId: number;
+  isImage: boolean;
+  fileType: string;
+};
 
 export type Attachment = {
-  url: string
-  name: string
-}
+  url: string;
+  name: string;
+};
 
 export interface ColorKeyGuide {
-    color: string
-    label: string
+  color: string;
+  label: string;
 }
 
 export type FilterDropdown = {
-  name: string
-  label: string
-  options: Array<string>
-}
+  name: string;
+  label: string;
+  options: Array<string>;
+};

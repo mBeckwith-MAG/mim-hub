@@ -14,9 +14,12 @@
   </div>
 </template>
 <script setup lang="ts">
-withDefaults(defineProps<{
-  separated?: boolean
-}>(), {
-  separated: false
-})
+withDefaults(
+  defineProps<{
+    separated?: boolean;
+  }>(),
+  {
+    separated: false,
+  }
+);
 </script>

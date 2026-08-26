@@ -27,7 +27,6 @@
   --spacing-2x: calc(var(--spacing) * 10);
 }
 
-
 @layer base {
   html,
   body {
@@ -37,7 +36,7 @@
   nav {
     @apply sticky top-0 flex justify-between items-center z-50;
     @apply bg-mid;
-    
+
     & .title {
       @apply text-4xl font-thin;
     }
@@ -51,21 +50,21 @@
     @apply border border-light p-sm rounded-2xl text-txt bg-light outline-none focus:border-2 w-full resize-none;
   }
 
-  input:not([type="file"]) {
+  input:not([type='file']) {
     @apply border border-dark p-sm rounded-2xl text-txt bg-light outline-none focus:border-2 w-full;
   }
 
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  input[type="number"] {
+  input[type='number'] {
     -moz-appearance: textfield;
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     @apply appearance-none size-5 border border-light rounded relative bg-white cursor-pointer;
     @apply checked:after:block after:border-white after:content-[''] after:absolute after:hidden after:left-1.5 after:top-0.5 after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:rotate-45;
   }
@@ -136,7 +135,7 @@
 
       &.outlined {
         @apply bg-transparent border border-gray-400 hover:bg-gray-300 hover:text-dark font-semibold;
-        @apply dark:hover:text-mid
+        @apply dark:hover:text-mid;
       }
     }
 
@@ -203,13 +202,13 @@
         @apply top-30;
       }
 
-      &> input:first-child {
+      & > input:first-child {
         @apply md:h-10 mt-auto;
       }
 
       & .toggle {
         @apply p-0.5;
-        
+
         &::after {
           @apply content-['...'] absolute bottom-0 left-0 right-0 cursor-pointer;
         }
