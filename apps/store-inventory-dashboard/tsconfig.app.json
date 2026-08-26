@@ -4,6 +4,16 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "types": ["vite/client"],
     "allowArbitraryExtensions": true,
+    "paths": {
+      "@mim-workspace/ui": ["../../packages/ui/index.ts"],
+      "@mim-workspace/ui/*": ["../../packages/ui/*"],
+      "@mim-workspace/constants": ["../../packages/constants/index.ts"],
+      "@mim-workspace/constants/*": ["../../packages/constants/*"],
+      "@mim-workspace/models": ["../../packages/models/index.ts"],
+      "@mim-workspace/models/*": ["../../packages/models/*"],
+      "@mim-workspace/types": ["../../packages/types/index.ts"],
+      "@mim-workspace/types/*": ["../../packages/types/*"]
+    },
 
     /* Linting */
     "noUnusedLocals": true,

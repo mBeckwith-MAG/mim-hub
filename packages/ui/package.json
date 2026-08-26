@@ -6,13 +6,14 @@
   "main": "index.ts",
   "types": "index.ts",
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "@iconify/vue": "^5.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matthew Beckwith <kodahScripts />",
   "license": "ISC",
   "type": "module",
   "dependencies": {

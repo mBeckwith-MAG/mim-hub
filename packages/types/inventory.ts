@@ -36,3 +36,9 @@ export interface ColorKeyGuide {
     color: string
     label: string
 }
+
+export type FilterDropdown = {
+  name: string
+  label: string
+  options: Array<string>
+}

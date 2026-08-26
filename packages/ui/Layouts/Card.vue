@@ -15,7 +15,7 @@
 </template>
 <script setup lang="ts">
 withDefaults(defineProps<{
-  separated: boolean
+  separated?: boolean
 }>(), {
   separated: false
 })

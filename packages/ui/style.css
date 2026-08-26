@@ -19,6 +19,12 @@
   --color-light: var(--light-color);
   --color-mid: var(--medium-color);
   --color-dark: var(--dark-color);
+  --spacing-xs: calc(var(--spacing) * 0.5);
+  --spacing-sm: calc(var(--spacing) * 2);
+  --spacing-md: calc(var(--spacing) * 4);
+  --spacing-lg: calc(var(--spacing) * 6);
+  --spacing-xl: calc(var(--spacing) * 8);
+  --spacing-2x: calc(var(--spacing) * 10);
 }
 
 
@@ -27,15 +33,41 @@
   body {
     @apply bg-light text-txt [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden;
   }
+
   nav {
-    @apply flex justify-between items-center;
+    @apply sticky top-0 flex justify-between items-center z-50;
     @apply bg-mid;
-    @apply border-b border-dark;
-    @apply shadow-md shadow-mid;
     
     & .title {
       @apply text-4xl font-thin;
     }
+  }
+
+  select {
+    @apply appearance-none border border-dark p-sm rounded-2xl text-txt bg-light outline-none focus:border-2 w-full cursor-pointer;
+  }
+
+  textarea {
+    @apply border border-light p-sm rounded-2xl text-txt bg-light outline-none focus:border-2 w-full resize-none;
+  }
+
+  input:not([type="file"]) {
+    @apply border border-dark p-sm rounded-2xl text-txt bg-light outline-none focus:border-2 w-full;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  input[type="checkbox"] {
+    @apply appearance-none size-5 border border-light rounded relative bg-white cursor-pointer;
+    @apply checked:after:block after:border-white after:content-[''] after:absolute after:hidden after:left-1.5 after:top-0.5 after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:rotate-45;
   }
 }
 
@@ -53,38 +85,38 @@
   }
 
   .badge {
-    @apply border-2 rounded-full px-4 py-1 text-xs;
+    @apply border-2 rounded-full px-2 py-1 text-xs;
 
     &.primary {
-      @apply bg-blue-200 border-blue-400 text-blue-400;
+      @apply bg-blue-200 border-blue-400 text-blue-600;
     }
 
     &.secondary {
-      @apply bg-gray-200 border-gray-400 text-gray-400;
+      @apply bg-gray-200 border-gray-400 text-gray-600;
     }
 
     &.success {
-      @apply bg-emerald-200 border-emerald-400 text-emerald-400;
+      @apply bg-emerald-200 border-emerald-400 text-emerald-600;
     }
 
     &.caution {
-      @apply bg-yellow-200 border-yellow-400 text-yellow-400;
+      @apply bg-yellow-200 border-yellow-400 text-yellow-600;
     }
 
     &.warning {
-      @apply bg-orange-200 border-orange-400 text-orange-400;
+      @apply bg-orange-200 border-orange-400 text-orange-600;
     }
 
     &.info {
-      @apply bg-sky-200 border-sky-400 text-sky-400;
+      @apply bg-sky-200 border-sky-400 text-sky-600;
     }
 
     &.update {
-      @apply bg-purple-200 border-purple-400 text-purple-400;
+      @apply bg-purple-200 border-purple-400 text-purple-600;
     }
 
     &.danger {
-      @apply bg-red-200 border-red-400 text-red-400;
+      @apply bg-red-200 border-red-400 text-red-600;
     }
   }
 
@@ -103,7 +135,8 @@
       @apply bg-gray-400 hover:bg-gray-500 text-white;
 
       &.outlined {
-        @apply bg-transparent border border-gray-400 hover:bg-gray-300 hover:text-mid font-semibold;
+        @apply bg-transparent border border-gray-400 hover:bg-gray-300 hover:text-dark font-semibold;
+        @apply dark:hover:text-mid
       }
     }
 
@@ -154,5 +187,37 @@
         @apply bg-transparent border border-red-400 hover:bg-red-300 text-red-400 font-semibold;
       }
     }
+
+    &.disabled {
+      @apply opacity-10 cursor-none;
+    }
+  }
+
+  .filter-bar {
+    @apply grid gap-md p-md bg-mid text-center transition-all duration-500 border-b border-dark;
+
+    &.horizontal {
+      @apply w-full grid grid-cols-6 gap-md shadow-md shadow-mid items-center;
+
+      &.show {
+        @apply top-30;
+      }
+
+      &> input:first-child {
+        @apply md:h-10 mt-auto;
+      }
+
+      & .toggle {
+        @apply p-0.5;
+        
+        &::after {
+          @apply content-['...'] absolute bottom-0 left-0 right-0 cursor-pointer;
+        }
+      }
+    }
+  }
+
+  .reversal-checkbox {
+    @apply checked:bg-red-500;
   }
 }

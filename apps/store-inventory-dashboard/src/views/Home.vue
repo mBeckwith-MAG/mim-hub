@@ -9,4 +9,6 @@
     Select a link from above to get started
   </div>
 </template>
-
+<script setup lang="ts">
+import Navigation from '@mim-workspace/ui/Layouts/Navigation.vue';
+</script>

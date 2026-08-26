@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav :class="{ 'shadow-md shadow-mid border-b border-dark': shadowed }">
     <div class="title">
       <div v-if="$slots.left">
         <slot name="left" />
@@ -22,3 +22,10 @@
     </div>
   </nav>
 </template>
+<script setup lang="ts">
+withDefaults(defineProps<{
+  shadowed?: boolean
+}>(), {
+  shadowed: false
+})
+</script>

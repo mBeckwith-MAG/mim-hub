@@ -1,6 +1,7 @@
 {
   "name": "@mim-workspace/models",
   "version": "1.0.0",
+  "author": "Matthew Beckwith <kodahScripts />",
   "private": true,
   "main": "./index.ts",
   "types": "./index.ts",

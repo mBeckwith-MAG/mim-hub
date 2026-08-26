@@ -3,7 +3,7 @@
     <template #title>
       <div class="grid gap-1">
         <div class="text-2xl">{{ item.stock_number }}</div>
-        <small><DateDisplay :date="item.created_date.text" /></small>
+        <small><DateDisplay :date="item.created_date.text || ''" /></small>
       </div>
       
       <div class="grid gap-1">
@@ -24,6 +24,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { InventoryItem } from '@mim-workspace/models'
+import {
+  Badge,
+  Card,
+  DateDisplay,
+} from '@mim-workspace/ui'
 import DataDisplay from '@mim-workspace/ui/Components/DataDisplay.vue';
 const props = defineProps<{
   item: InventoryItem

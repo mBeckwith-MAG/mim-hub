@@ -8,7 +8,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-// import ItemDisplay from './components/ItemDisplay.vue'
+import { Container, Loading } from '@mim-workspace/ui'
 
-const loading = ref(true)
+const loading = ref(false)
 </script>

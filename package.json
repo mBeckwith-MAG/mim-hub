@@ -1,6 +1,12 @@
 {
     "name": "mim-workspace",
     "private": true,
+    "author": "Matthew Beckwith <kodahScripts />",
+    "scripts": {
+        "build": "pnpm -r build",
+        "build:apps": "pnpm --filter store-inventory-dashboard build && pnpm --filter accounting-inventory-widget build",
+        "typecheck": "pnpm --filter store-inventory-dashboard exec vue-tsc -b && pnpm --filter accounting-inventory-widget exec vue-tsc -b"
+    },
     "engines": {
         "node": ">=20.0.0"
     }

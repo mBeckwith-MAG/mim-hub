@@ -1,6 +1,7 @@
 {
   "name": "store-inventory-dashboard",
   "private": true,
+  "author": "Matthew Beckwith <kodahScripts />",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

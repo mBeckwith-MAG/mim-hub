@@ -8,7 +8,7 @@ import Store from '../views/Store.vue'
 const routes = [
   { path: '/', component: Home },
   { path: '/inventory', component: AllInventory },
-  { path: '/inventory/:storeName', component: Store },
+  { path: '/inventory/:storeAbbr', component: Store },
   { path: '/inventory/add-vehicle', component: AddVehicle },
 ]
 

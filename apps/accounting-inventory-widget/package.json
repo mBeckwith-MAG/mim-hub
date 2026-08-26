@@ -1,6 +1,7 @@
 {
   "name": "accounting-inventory-widget",
   "private": true,
+  "author": "Matthew Beckwith <kodahScripts />",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -9,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mim-workspace/constants": "workspace:*",
+    "@mim-workspace/models": "workspace:*",
+    "@mim-workspace/types": "workspace:*",
+    "@mim-workspace/ui": "workspace:*",
     "vue": "^3.5.40"
   },
   "devDependencies": {
