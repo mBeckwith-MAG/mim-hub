@@ -15,8 +15,5 @@
   "keywords": [],
   "author": "Matthew Beckwith <kodahScripts />",
   "license": "ISC",
-  "type": "module",
-  "dependencies": {
-    "@iconify/vue": "^5.0.1"
-  }
+  "type": "module"
 }
