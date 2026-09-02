@@ -1,5 +1,12 @@
 <template>
-  <span>{{ formattedDate }}</span>
+  <div class="text-center">
+    <div class="truncate">
+      {{ formattedDate }}
+    </div>
+    <small>
+      <slot />
+    </small>
+  </div>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
@@ -11,6 +18,7 @@ const props = defineProps({
 });
 
 const formattedDate = computed(() => {
+  if (!props.date) return '-';
   const dateData = props.date.split('-');
   let [_, month, day] = dateData;
 

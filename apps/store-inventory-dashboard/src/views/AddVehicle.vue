@@ -2,34 +2,54 @@
   <Navigation class="py-8.75 px-4" shadowed>
     <template #left>Add a Vehicle</template>
     <template #right>
-      <button
-        :class="['btn btn-md secondary outlined', { hidden: isDisabled }]"
+      <Button
+        variant="secondary"
+        outlined
         :disabled="isDisabled"
         @click="handleSubmit"
+        >SUBMIT</Button
       >
-        SUBMIT
-      </button>
     </template>
   </Navigation>
-  <AddVehicleForm :showPayoff="hasPayoff">
+
+  <VehicleForm :showPayoff="hasPayoff">
     <template #top-row>
       <Card>
         <template #title>Personal Information</template>
         <template #body>
           <Grid>
-            <FormInput name="yourName" v-model="submitBy" />
-            <FormInput name="yourEmail" input-type="email" v-model="email" />
-            <Dropdown name="stores" :options="storeOptions" v-model="storeName"
+            <FormInput name="yourName" hasBorder v-model="submitBy"
+              >Your Name</FormInput
+            >
+            <FormInput
+              name="yourEmail"
+              hasBorder
+              inputType="email"
+              v-model="email"
+              >Your Email</FormInput
+            >
+            <Dropdown
+              name="stores"
+              :options="storeOptions"
+              v-model="storeName"
+              required
+              forceLabel
               >Choose a Store</Dropdown
             >
           </Grid>
         </template>
       </Card>
+
       <Card>
         <template #title>Vehicle Information</template>
         <template #body>
           <Grid :cols="2">
-            <Dropdown name="carType" :options="carTypeOptions" v-model="carType"
+            <Dropdown
+              name="carType"
+              :options="carTypeOptions"
+              v-model="carType"
+              required
+              forceLabel
               >Car Type</Dropdown
             >
             <Dropdown
@@ -39,6 +59,8 @@
                 carType?.includes('New') ? newOriginOptions : usedOriginOptions
               "
               v-model="origin"
+              required
+              forceLabel
               >Car Origin</Dropdown
             >
             <Dropdown
@@ -50,6 +72,8 @@
               "
               :options="origin.includes('Sale') ? SaleOptions : PurchaseOptions"
               v-model="transactionMethod"
+              required
+              forceLabel
               >Transaction Method</Dropdown
             >
             <Dropdown
@@ -57,6 +81,8 @@
               name="titleOrPayoff"
               :options="titleOrPayoffOptions"
               v-model="titleOrPayoff"
+              required
+              forceLabel
               >Title or Payoff?</Dropdown
             >
             <Dropdown
@@ -64,80 +90,126 @@
               name="titleType"
               :options="TitleOptions"
               v-model="titleType"
+              required
+              forceLabel
               >Title Type</Dropdown
             >
           </Grid>
         </template>
       </Card>
+
       <Card v-if="hasPayoff">
         <template #title>Payoff Information</template>
         <template #body>
           <Grid>
-            <FormInput name="lienHolder" v-model="lienHolder" />
+            <FormInput name="lienHolder" v-model="lienHolder" hasBorder
+              >Lien Holder</FormInput
+            >
             <FormInput
               name="payoffAmount"
               input-type="number"
-              v-model="payoffAmount"
-            />
-            <FormInput name="perDiem" input-type="number" v-model="perDiem" />
-            <FormInput name="goodTill" input-type="date" v-model="goodTill" />
+              v-model.number="payoffAmount"
+              hasBorder
+              >Payoff Amount</FormInput
+            >
+            <FormInput
+              name="perDiem"
+              input-type="number"
+              v-model.number="perDiem"
+              hasBorder
+              >Per Diem</FormInput
+            >
+            <FormInput
+              name="goodTill"
+              input-type="date"
+              v-model.number="goodTill"
+              hasBorder
+              >Good Till</FormInput
+            >
           </Grid>
         </template>
       </Card>
     </template>
+
     <template #bottom-row>
       <Card>
-        <template #title>Add Stock Numbers</template>
-        <template #body>
-          <Grid>
+        <template #title>
+          <div class="w-full">
             <FormInput
               name="stockNumber"
-              :showLabel="false"
               v-model="stockNumber"
               @keyup.enter="addStockNumber"
-            />
-            <Grid :cols="3">
-              <Badge
-                v-for="(stockNum, index) in stockNumbers"
-                :key="`stock-number-badge-${index}`"
-                @removeBadge="() => removeStockNumber(index)"
-                class="info"
-                closable
-                >{{ stockNum }}</Badge
-              >
-            </Grid>
+              hasBorder
+              >Add Stock Number</FormInput
+            >
+          </div>
+        </template>
+        <template #body>
+          <Grid :cols="8">
+            <Badge
+              v-for="(stockNum, index) in stockNumbers"
+              :key="`stock-number-badge-${index}`"
+              @removeBadge="() => removeStockNumber(index)"
+              class="info"
+              closable
+              >{{ stockNum }}</Badge
+            >
           </Grid>
         </template>
       </Card>
+
       <Card>
         <template #title>Additional Information</template>
         <template #body>
-          <FileUploader @update:files="handleFilesUpdate" />
-          <div class="flex justify-evenly">
-            <div class="grid gap-sm w-full text-center mt-xl">
-              <label for="reversal-checkbox">Reversal</label>
-              <input
-                type="checkbox"
-                id="reversal-checkbox"
-                class="ms-auto me-auto reversal-checkbox"
-                v-model="isReversal"
+          <Grid :cols="2">
+            <Grid>
+              <div>
+                <FileUploader @files-selected="handleFilesSelected" />
+              </div>
+              <Grid class="gap-sm w-full text-center mt-xl">
+                <label for="reversal-checkbox">Reversal</label>
+                <input
+                  type="checkbox"
+                  id="reversal-checkbox"
+                  class="ms-auto me-auto reversal-checkbox"
+                  v-model="isReversal"
+                />
+                <small>Check if this should be considered a Reversal</small>
+              </Grid>
+            </Grid>
+
+            <div class="h-full flex flex-col justify-start">
+              <p
+                class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-sm"
+              >
+                Attachments Preview ({{ extendedFiles.length }})
+              </p>
+              <FilePreviewList
+                v-if="extendedFiles.length > 0"
+                :items="extendedFiles"
+                :cols="5"
+                @remove="removeFile"
               />
-              <small>Check if this should be considered a Reversal</small>
+              <div
+                v-else
+                class="flex flex-col items-center justify-center border-2 border-dotted border-gray-200 dark:border-gray-700 rounded-lg p-6 h-40 text-center text-xs text-gray-400 dark:text-gray-500"
+              >
+                No attachments uploaded yet
+              </div>
             </div>
-            <textarea
-              v-model="formNotes"
-              cols="70"
-              rows="5"
-              placeholder="Additional Notes..."
-            />
-          </div>
+          </Grid>
+          <FormTextarea name="additional" v-model="formNotes" canEdit
+            >Additional Notes</FormTextarea
+          >
         </template>
       </Card>
     </template>
-  </AddVehicleForm>
+  </VehicleForm>
 </template>
+
 <script setup lang="ts">
-import { computed, ref, type Ref } from 'vue';
+import { computed, ref } from 'vue';
+import VehicleForm from '../layouts/VehicleForm.vue';
 import {
   BASE_URL,
   Stores,
@@ -150,33 +222,43 @@ import {
   usedOriginOptions,
 } from '@mim-workspace/constants';
 import {
+  Button,
   Card,
-  AddVehicleForm,
   FormInput,
   Navigation,
   Grid,
   Dropdown,
   Badge,
   FileUploader,
+  FilePreviewList,
+  FormTextarea,
 } from '@mim-workspace/ui';
+import type { RawFile } from '@mim-workspace/types';
 
-const submitBy: Ref<string | null> = ref(null);
-const email: Ref<string | null> = ref(null);
-const storeName: Ref<string | null> = ref(null);
-const carType: Ref<string | null> = ref(null);
-const origin: Ref<string | null> = ref(null);
-const transactionMethod: Ref<string | null> = ref(null);
-const titleOrPayoff: Ref<string | null> = ref(null);
-const titleType: Ref<string | null> = ref(null);
-const lienHolder: Ref<string | null> = ref(null);
-const payoffAmount: Ref<number | null> = ref(null);
-const perDiem: Ref<number | null> = ref(null);
-const goodTill: Ref<string | null> = ref(null);
-const formNotes: Ref<string | null> = ref(null);
-const isReversal: Ref<boolean> = ref(false);
-const attachments: Ref<File[]> = ref([]);
-const stockNumbers: Ref<Array<String>> = ref([]);
-const stockNumber: Ref<String | null> = ref(null);
+const submitBy = ref<string | undefined>(undefined);
+const email = ref<string | undefined>(undefined);
+const storeName = ref<string | undefined>(undefined);
+const carType = ref<string | undefined>(undefined);
+const origin = ref<string | undefined>(undefined);
+const transactionMethod = ref<string | undefined>(undefined);
+const titleOrPayoff = ref<string | undefined>(undefined);
+const titleType = ref<string | undefined>(undefined);
+const lienHolder = ref<string | undefined>(undefined);
+const goodTill = ref<string | undefined>(undefined);
+
+const payoffAmount = ref<number | undefined>(undefined);
+const perDiem = ref<number | undefined>(undefined);
+
+const stockNumbers = ref<string[]>([]);
+const stockNumber = ref<string | undefined>(undefined);
+
+const isReversal = ref<boolean>(false);
+const formNotes = ref<string>('');
+const extendedFiles = ref<RawFile[]>([]);
+
+const attachments = computed(() => {
+  return extendedFiles.value.map((item) => item.file);
+});
 
 const hasPayoff = computed(() => {
   return titleOrPayoff.value === 'Payoff';
@@ -186,14 +268,50 @@ const storeOptions = computed(() => {
   return Stores.map((store) => store.name);
 });
 
-function handleFilesUpdate(filesPayload: File[]) {
-  attachments.value = filesPayload;
+function handleFilesSelected(newFiles: File[]) {
+  newFiles.forEach((currentFile) => {
+    const isDuplicate = extendedFiles.value.some(
+      (f) =>
+        f.file.name === currentFile.name && f.file.size === currentFile.size
+    );
+    if (isDuplicate) return;
+
+    let previewUrl: string | null = null;
+    if (currentFile.type.startsWith('image/')) {
+      previewUrl = URL.createObjectURL(currentFile);
+    }
+
+    extendedFiles.value.push({
+      id: crypto.randomUUID(),
+      file: currentFile,
+      preview: previewUrl || '',
+    });
+  });
+}
+
+function removeFile(idToRemove: string) {
+  const index = extendedFiles.value.findIndex((item) => item.id === idToRemove);
+  if (index !== -1) {
+    if (extendedFiles.value[index].preview) {
+      URL.revokeObjectURL(extendedFiles.value[index].preview!);
+    }
+    extendedFiles.value.splice(index, 1);
+  }
+}
+
+function clearAttachments() {
+  extendedFiles.value.forEach((item) => {
+    if (item.preview) {
+      URL.revokeObjectURL(item.preview);
+    }
+  });
+  extendedFiles.value = [];
 }
 
 function addStockNumber() {
   if (stockNumber.value) {
     stockNumbers.value.push(stockNumber.value);
-    stockNumber.value = null;
+    stockNumber.value = undefined;
   }
 }
 
@@ -219,7 +337,6 @@ async function handleSubmit() {
   }
 
   const formData = new FormData();
-
   formData.append('submitBy', submitBy.value || '');
   formData.append('email', email.value || '');
   formData.append('storeName', storeName.value || '');
@@ -236,18 +353,15 @@ async function handleSubmit() {
   formData.append('isReversal', isReversal.value.toString());
   formData.append('stockNumbers', JSON.stringify(stockNumbers.value));
 
-  if (attachments.value) {
-    for (let i = 0; i < attachments.value.length; i++) {
-      formData.append('attachments', attachments.value[i]);
-    }
-  }
+  attachments.value.forEach((file) => {
+    formData.append('attachments', file);
+  });
 
   try {
     const response = await fetch(`${BASE_URL}/inventory/add-vehicle`, {
       method: 'POST',
       body: formData,
     });
-
     if (response.ok) {
       const data = await response.json();
       console.log('Form Data', data);
@@ -257,43 +371,23 @@ async function handleSubmit() {
   } catch (error) {
     console.error('Network error occurred:', error);
   } finally {
-    submitBy.value = null;
-    email.value = null;
-    storeName.value = null;
-    carType.value = null;
-    origin.value = null;
-    transactionMethod.value = null;
-    titleOrPayoff.value = null;
-    titleType.value = null;
-    lienHolder.value = null;
-    payoffAmount.value = null;
-    perDiem.value = null;
-    goodTill.value = null;
-    formNotes.value = null;
+    submitBy.value = undefined;
+    email.value = undefined;
+    storeName.value = undefined;
+    carType.value = undefined;
+    origin.value = undefined;
+    transactionMethod.value = undefined;
+    titleOrPayoff.value = undefined;
+    titleType.value = undefined;
+    lienHolder.value = undefined;
+    payoffAmount.value = undefined;
+    perDiem.value = undefined;
+    goodTill.value = undefined;
+    formNotes.value = '';
     isReversal.value = false;
-    attachments.value = [];
     stockNumbers.value = [];
-  }
-}
 
-function formDebug() {
-  console.log('Results', {
-    submitBy: submitBy.value,
-    email: email.value,
-    store: storeName.value,
-    car_type: carType.value,
-    origin: origin.value,
-    transMth: transactionMethod.value,
-    title: titleOrPayoff.value,
-    titleType: titleType.value,
-    lien: lienHolder.value,
-    payoffAmount: payoffAmount.value,
-    perdiem: perDiem.value,
-    goodTill: goodTill.value,
-    notes: formNotes.value,
-    reversal: isReversal.value,
-    atts: attachments.value,
-    nmbs: stockNumbers.value,
-  });
+    clearAttachments();
+  }
 }
 </script>

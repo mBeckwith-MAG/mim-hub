@@ -7,7 +7,10 @@
   "compilerOptions": {
     "paths": {
       "@mim-workspace/ui": ["../../packages/ui/index.ts"],
-      "@mim-workspace/ui/*": ["../../packages/ui/*"],
+      "@mim-workspace/ui/*": [
+        "../../packages/ui/src/*",
+        "../../packages/ui/styles/*"
+      ],
       "@mim-workspace/constants": ["../../packages/constants/index.ts"],
       "@mim-workspace/constants/*": ["../../packages/constants/*"],
       "@mim-workspace/models": ["../../packages/models/index.ts"],

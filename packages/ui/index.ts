@@ -1,2 +1,2 @@
-export * from './Components';
-export * from './Layouts';
+export * from './src/Components';
+export * from './src/Layouts';

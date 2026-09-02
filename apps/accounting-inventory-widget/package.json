@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iconify/vue": "^5.0.1",
     "@mim-workspace/constants": "workspace:*",
     "@mim-workspace/models": "workspace:*",
     "@mim-workspace/types": "workspace:*",
@@ -17,7 +18,6 @@
     "vue": "^3.5.40"
   },
   "devDependencies": {
-    "@mim-workspace/tailwind": "workspace:*",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^24.13.3",
     "@vitejs/plugin-vue": "^6.0.8",

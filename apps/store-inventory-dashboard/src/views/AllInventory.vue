@@ -6,25 +6,48 @@
     <div class="title">{{ error }}</div>
   </Container>
   <div v-else>
-    <Navigation class="py-0.75 px-4">
+    <Navigation class="sticky top-0 py-lg px-4 z-50">
       <template #left>All Inventory</template>
       <template #right>
-        <RouterLink to="/inventory/add-vehicle">
-          <Icon
-            icon="basil:add-outline"
-            width="4em"
-            class="btn secondary outlined"
+        <div class="flex justify-end gap-lg items-center">
+          <ColorKey
+            groupName="inventory"
+            :guides="[
+              {
+                color: 'bg-yellow-500',
+                label: 'Working',
+              },
+              {
+                color: 'bg-red-500',
+                label: 'Reject',
+              },
+              {
+                color: 'bg-purple-500',
+                label: 'Missing Vendor',
+              },
+              {
+                color: 'bg-emerald-500',
+                label: 'Done',
+              },
+            ]"
           />
-        </RouterLink>
+          <RouterLink to="/inventory/add-vehicle">
+            <Icon
+              icon="basil:add-outline"
+              width="4em"
+              class="btn secondary outlined"
+            />
+          </RouterLink>
+        </div>
       </template>
     </Navigation>
     <FilterBar
-      :class="['fixed z-40']"
-      v-model="searchQuery"
+      v-model:search="searchQuery"
+      v-model:filters="activeFilters"
       :dropdowns="searchOptions"
       horizontal
     />
-    <Container class="relative top-10">
+    <Container>
       <TabContainer :tabs="tabs">
         <template #current="{ item }">
           <ItemCard :item />
@@ -40,7 +63,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, ref, type Ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import {
   BASE_URL,
   BOARDS,
@@ -58,6 +81,7 @@ import { InventoryItem } from '@mim-workspace/models';
 import ItemCard from '../components/ItemCard.vue';
 import { Icon } from '@iconify/vue';
 import {
+  ColorKey,
   Container,
   FilterBar,
   Loading,
@@ -67,13 +91,19 @@ import {
 
 const loading = ref(true);
 const error = ref('');
-const currentItems: Ref<InventoryItem[]> = ref([]);
-const previousItems: Ref<InventoryItem[]> = ref([]);
-const printItems: Ref<InventoryItem[]> = ref([]);
-const searchQuery = ref('');
-const searchOptions = ref([
+const currentItems = ref<InventoryItem[]>([]);
+const previousItems = ref<InventoryItem[]>([]);
+const printItems = ref<InventoryItem[]>([]);
+
+const searchQuery = ref<string | undefined>('');
+const activeFilters = ref({
+  category: '',
+  status: '',
+});
+
+const searchOptions = [
   {
-    name: 'carType',
+    name: 'car_type',
     label: 'Car Type',
     options: carTypeOptions,
   },
@@ -83,16 +113,16 @@ const searchOptions = ref([
     options: statusOptions,
   },
   {
-    name: 'carOrigin',
+    name: 'car_origin',
     label: 'Car Origin',
     options: [...newOriginOptions, ...usedOriginOptions],
   },
   {
-    name: 'titleOrPayoff',
+    name: 'title_or_payoff',
     label: 'Title or Payoff',
     options: titleOrPayoffOptions,
   },
-]);
+];
 
 const tabs = computed(() => [
   {
@@ -101,6 +131,7 @@ const tabs = computed(() => [
     icon: 'fluent:vehicle-car-profile-ltr-16-regular',
     items: currentItems.value,
     search: searchQuery.value,
+    filters: activeFilters.value,
   },
   {
     id: 'previous',
@@ -108,6 +139,7 @@ const tabs = computed(() => [
     icon: 'fluent:vehicle-car-profile-ltr-clock-16-regular',
     items: previousItems.value,
     search: searchQuery.value,
+    filters: activeFilters.value,
   },
   {
     id: 'print',
@@ -115,6 +147,7 @@ const tabs = computed(() => [
     icon: 'famicons:print-outline',
     items: printItems.value,
     search: searchQuery.value,
+    filters: activeFilters.value,
   },
 ]);
 
@@ -150,8 +183,8 @@ onMounted(async () => {
       ...printingBoardItems,
     ];
 
-    searchOptions.value.push({
-      name: 'submitBy',
+    searchOptions.push({
+      name: 'submit_by',
       label: 'Submit By',
       options: [
         ...new Set(

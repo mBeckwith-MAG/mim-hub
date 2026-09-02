@@ -1,6 +1,0 @@
-{
-  "name": "@mim-workspace/tailwind",
-  "version": "1.0.0",
-  "author": "Matthew Beckwith <kodahScripts />",
-  "main": "./base.config.ts"
-}

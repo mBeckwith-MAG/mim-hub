@@ -1,9 +1,13 @@
 export { default as AttachmentDisplay } from './AttachmentDisplay.vue';
 export { default as Badge } from './Badge.vue';
+export { default as Button } from './Button.vue';
 export { default as ColorKey } from './ColorKey.vue';
 export { default as DataDisplay } from './DataDisplay.vue';
 export { default as DateDisplay } from './DateDisplay.vue';
 export { default as Dropdown } from './Dropdown.vue';
+export { default as EditDate } from './EditDate.vue';
+export { default as EditInput } from './EditInput.vue';
+export { default as FilePreviewList } from './FilePreviewList.vue';
 export { default as FileUploader } from './FileUploader.vue';
 export { default as FilterBar } from './FilterBar.vue';
 export { default as FormInput } from './FormInput.vue';

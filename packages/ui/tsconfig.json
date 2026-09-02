@@ -9,5 +9,9 @@
     "skipLibCheck": true,
     "isolatedModules": true
   },
-  "include": ["**/*.ts", "**/*.vue"]
+  "include": [
+    "**/*.ts",
+    "**/*.vue",
+    "../../apps/store-inventory-dashboard/src/layouts/VehicleForm.vue"
+  ]
 }

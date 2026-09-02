@@ -10,8 +10,15 @@ export interface Item {
   column_values: Array<ColVal>;
 }
 
+export interface BoardItem {
+  id: string;
+  name: string;
+  board: Board;
+  column_values: Array<ColVal>;
+}
+
 export interface RawFile {
-  ui: string;
+  id: string;
   file: File;
   preview: string;
 }
@@ -41,4 +48,9 @@ export type FilterDropdown = {
   name: string;
   label: string;
   options: Array<string>;
+};
+
+export type Board = {
+  id: string;
+  name: string;
 };

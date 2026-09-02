@@ -11,7 +11,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { ColorKeyGuide } from '../../types';
+import type { ColorKeyGuide } from '../../../types';
 
 defineProps<{
   groupName: string;

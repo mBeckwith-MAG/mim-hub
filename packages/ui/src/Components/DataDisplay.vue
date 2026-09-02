@@ -5,13 +5,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
 const props = defineProps<{
-  k: string;
+  label: string;
   value: string;
 }>();
-
-const label = computed(() => {
-  return props.k.split('_').join(' ');
-});
 </script>

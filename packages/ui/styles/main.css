@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+:root {
+  --faint-color: var(--color-mist-100);
+  --light-color: var(--color-mist-200);
+  --medium-color: var(--color-mist-300);
+  --dark-color: var(--color-mist-400);
+  --default-border-color: var(--color-mist-300);
+  --default-text-color: var(--color-mist-950);
+}
+
+@variant dark {
+  :root {
+    --faint-color: var(--color-mist-400);
+    --light-color: var(--color-mist-700);
+    --medium-color: var(--color-mist-800);
+    --dark-color: var(--color-mist-900);
+    --default-border-color: var(--color-mist-600);
+    --default-text-color: var(--color-mist-300);
+  }
+}
+
+@theme {
+  --color-txt: var(--default-text-color);
+  --color-faint: var(--faint-color);
+  --color-light: var(--light-color);
+  --color-mid: var(--medium-color);
+  --color-dark: var(--dark-color);
+  --color-brdr: var(--default-border-color);
+  --spacing-xs: calc(var(--spacing) * 0.5);
+  --spacing-sm: calc(var(--spacing) * 2);
+  --spacing-md: calc(var(--spacing) * 4);
+  --spacing-lg: calc(var(--spacing) * 6);
+  --spacing-xl: calc(var(--spacing) * 8);
+  --spacing-2x: calc(var(--spacing) * 10);
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-light text-txt [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden;
+  }
+
+  nav {
+    @apply flex justify-between items-center;
+    @apply bg-mid;
+
+    & .title {
+      @apply text-4xl font-thin;
+    }
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  input[type='checkbox'] {
+    @apply appearance-none size-5 border border-light rounded relative bg-white cursor-pointer;
+    @apply checked:after:block after:border-white after:content-[''] after:absolute after:hidden after:left-1.5 after:top-0.5 after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:rotate-45;
+  }
+}
+
+@layer components {
+  .reversal-checkbox {
+    @apply checked:bg-red-500;
+  }
+}

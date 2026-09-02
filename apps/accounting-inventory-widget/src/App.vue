@@ -3,14 +3,19 @@
     <p class="text-2xl font-thin font-stretch-semi-expanded">
       My Assigned Items
     </p>
-    <Loading v-if="loading" hasLabel />
+    <p v-if="loading">Loading...</p>
+    <p v-if="error">{{ error }}</p>
 
-    <!-- <ItemDisplay v-else v-for="item in assignedItems" :item :key="item.id" /> -->
+    <ItemDisplay v-else v-for="item in assignedItems" :item :key="item.id" />
   </Container>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Container, Loading } from '@mim-workspace/ui';
+import { storeToRefs } from 'pinia';
+import { useCurrentItemsStore } from '@/stores/current_items';
 
-const loading = ref(false);
+import { Container } from '@mim-workspace/ui';
+import ItemDisplay from '@/components/ItemDisplay.vue';
+
+const currentItemsStore = useCurrentItemsStore();
+const { assignedItems, loading, error } = storeToRefs(currentItemsStore);
 </script>

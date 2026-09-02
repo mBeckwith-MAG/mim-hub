@@ -1,19 +1,21 @@
 {
   "name": "@mim-workspace/ui",
+  "author": "Matthew Beckwith <kodahScripts />",
   "version": "1.0.0",
   "private": true,
-  "description": "Custom Component Library for MIM Apps",
-  "main": "index.ts",
-  "types": "index.ts",
+  "type": "module",
+  "main": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./styles/*": "./styles/*",
+    "./*": "./src/*"
+  },
   "peerDependencies": {
-    "vue": "^3.0.0",
-    "@iconify/vue": "^5.0.1"
+    "@iconify/vue": "^4.1.2",
+    "vue": "^3.5.0"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Matthew Beckwith <kodahScripts />",
-  "license": "ISC",
-  "type": "module"
+  "devDependencies": {
+    "@iconify/vue": "^4.1.2",
+    "vue": "^3.5.0"
+  }
 }
