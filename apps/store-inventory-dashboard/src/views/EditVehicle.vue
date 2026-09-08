@@ -187,12 +187,13 @@ import { useRoute, useRouter } from 'vue-router';
 
 import { InventoryItem } from '@mim-workspace/models';
 import {
-  CurrentBoardColumns,
   BASE_URL,
-  PreviousBoardColumns,
-  PrintingBoardColumns,
+  BOARDS,
+  Columns
 } from '@mim-workspace/constants';
-import type { Attachment, Item, RawFile, RawFiles } from '@mim-workspace/types';
+import type { Item, RawFile } from '@mim-workspace/types';
+// import type { Attachment, RawFiles } from '@mim-workspace/types';
+
 
 import {
   Button,
@@ -248,9 +249,9 @@ const newNotes = ref<string | undefined>(undefined);
 
 const extendedFiles = ref<RawFile[]>([]);
 
-const newAttachments = computed(() => {
-  return extendedFiles.value.map((item) => item.file);
-});
+// const newAttachments = computed(() => {
+//   return extendedFiles.value.map((item) => item.file);
+// });
 
 const hasChanged = computed(() => {
   if (
@@ -306,10 +307,10 @@ onMounted(async () => {
     const { id, name, column_values, board } = data.item.items[0];
 
     const columnKeys = board.name.toLowerCase().includes('current')
-      ? CurrentBoardColumns
+      ? { ...Columns, ...BOARDS.current.columns }
       : board.name.toLowerCase().includes('previous')
-        ? PreviousBoardColumns
-        : PrintingBoardColumns;
+        ? { ...Columns, ...BOARDS.previous.columns }
+        : { ...Columns, ...BOARDS.printing.columns };
 
     UID.value = id;
 
@@ -326,7 +327,7 @@ onMounted(async () => {
           'text' in vehicleValue
         ) {
           if (vehicleValue.text !== null && vehicleValue.text !== '') {
-            if (vehicleValue.id === CurrentBoardColumns.attachments) {
+            if (vehicleValue.id === Columns.attachments) {
               refMapping[key].value = vehicleValue.value || '';
             } else if (typeof refMapping[key].value === 'number') {
               refMapping[key].value = Number(vehicleValue.text);
@@ -345,21 +346,21 @@ onMounted(async () => {
   }
 });
 
-const attachmentList = computed<Attachment[]>(() => {
-  const files: Array<Attachment> = [];
-  if (existing_attachments.value && existing_attachments.value.length) {
-    const parsed: RawFiles = JSON.parse(String(existing_attachments.value));
+// const attachmentList = computed<Attachment[]>(() => {
+//   const files: Array<Attachment> = [];
+//   if (existing_attachments.value && existing_attachments.value.length) {
+//     const parsed: RawFiles = JSON.parse(String(existing_attachments.value));
 
-    return parsed.files.map((file) => {
-      return {
-        url: String(`${BASE_URL}/assets/${file.assetId}`),
-        name: String(file.name),
-      };
-    });
-  }
+//     return parsed.files.map((file) => {
+//       return {
+//         url: String(`${BASE_URL}/assets/${file.assetId}`),
+//         name: String(file.name),
+//       };
+//     });
+//   }
 
-  return files;
-});
+//   return files;
+// });
 
 const hasPayoff = computed(() => {
   return titleOrPayoff.value === 'Payoff';
@@ -369,9 +370,9 @@ const canEdit = computed(() => {
   return status.value === 'Reject';
 });
 
-const handleAddFile = (files: RawFile[]) => {
-  extendedFiles.value = files;
-};
+// const handleAddFile = (files: RawFile[]) => {
+//   extendedFiles.value = files;
+// };
 
 async function handleUpdate() {
   const formData = new FormData();
@@ -475,7 +476,7 @@ const combinedNotes = computed(() => {
   return formNotes.value;
 });
 
-function handleNotes(e: HTMLTextAreaElement) {
-  newNotes.value = e.value;
-}
+// function handleNotes(e: HTMLTextAreaElement) {
+//   newNotes.value = e.value;
+// }
 </script>

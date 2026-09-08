@@ -3,7 +3,7 @@
     <div class="truncate">
       {{ formattedDate }}
     </div>
-    <small>
+    <small v-if="$slots.default">
       <slot />
     </small>
   </div>

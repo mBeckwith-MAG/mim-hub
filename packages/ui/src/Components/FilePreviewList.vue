@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { RawFile } from '../../../types';
+import type { RawFile } from '../../../types';
 import { Grid } from '../Layouts';
 
 withDefaults(

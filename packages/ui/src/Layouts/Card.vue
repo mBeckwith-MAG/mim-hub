@@ -16,7 +16,7 @@
 
     <div v-if="$slots.footer" class="w-full mt-auto">
       <hr v-if="separated" class="opacity-10 my-3.5" />
-      <div class="flex justify-between gap-md">
+      <div class="flex justify-between gap-lg">
         <slot name="footer" />
       </div>
     </div>

@@ -29,7 +29,8 @@ type BadgeVariant =
   | 'warning'
   | 'info'
   | 'update'
-  | 'danger';
+  | 'danger'
+  | 'missing';
 
 interface Props {
   variant?: BadgeVariant;
@@ -37,7 +38,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  variant: 'primary',
+  variant: 'secondary',
   closable: false,
 });
 
@@ -54,5 +55,6 @@ const variantClasses: Record<BadgeVariant, string> = {
   info: 'bg-sky-200 border-sky-400 text-sky-600',
   update: 'bg-purple-200 border-purple-400 text-purple-600',
   danger: 'bg-red-200 border-red-400 text-red-600',
+  missing: 'bg-pink-200 border-pink-400 text-pink-600',
 };
 </script>

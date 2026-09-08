@@ -74,9 +74,7 @@ import {
   statusOptions,
   titleOrPayoffOptions,
   usedOriginOptions,
-  CurrentBoardColumns,
-  PreviousBoardColumns,
-  PrintingBoardColumns,
+  Columns
 } from '@mim-workspace/constants';
 import type { Item } from '@mim-workspace/types';
 import { InventoryItem } from '@mim-workspace/models';
@@ -153,27 +151,36 @@ onMounted(async () => {
         (store) => store.abbr === String(route.params.storeAbbr).toUpperCase()
       )?.name || null;
     const currentResponse = await fetch(
-      `${BASE_URL}/boards/${BOARDS.currentItems}`
+      `${BASE_URL}/boards/${BOARDS.current.id}`
     );
     const currentData = await currentResponse.json();
     const currentBoardItems = currentData.items.map((item: Item) => {
-      return new InventoryItem(item, CurrentBoardColumns);
+      return new InventoryItem(item, {
+        ...Columns,
+        ...BOARDS.current.columns,
+      });
     });
 
     const previousResponse = await fetch(
-      `${BASE_URL}/boards/${BOARDS.previousItems}`
+      `${BASE_URL}/boards/${BOARDS.previous.id}`
     );
     const previousData = await previousResponse.json();
     const previousBoardItems = previousData.items.map((item: Item) => {
-      return new InventoryItem(item, PreviousBoardColumns);
+      return new InventoryItem(item, {
+        ...Columns,
+        ...BOARDS.previous.columns
+      });
     });
 
     const printingResponse = await fetch(
-      `${BASE_URL}/boards/${BOARDS.printingItems}`
+      `${BASE_URL}/boards/${BOARDS.printing.id}`
     );
     const printingData = await printingResponse.json();
     const printingBoardItems = printingData.items.map((item: Item) => {
-      return new InventoryItem(item, PrintingBoardColumns);
+      return new InventoryItem(item, {
+        ...Columns,
+        ...BOARDS.printing.columns
+      });
     });
 
     currentItems.value = currentBoardItems.filter(

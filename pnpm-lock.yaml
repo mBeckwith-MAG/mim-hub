@@ -22,12 +22,18 @@ importers:
       '@mim-workspace/models':
         specifier: workspace:*
         version: link:../../packages/models
+      '@mim-workspace/queries':
+        specifier: workspace:*
+        version: link:../../packages/queries
       '@mim-workspace/types':
         specifier: workspace:*
         version: link:../../packages/types
       '@mim-workspace/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@mondaydotcomorg/api':
+        specifier: ^14.0.0
+        version: 14.0.0
       vue:
         specifier: ^3.5.40
         version: 3.5.41(typescript@6.0.3)
@@ -117,6 +123,8 @@ importers:
         specifier: workspace:*
         version: link:../types
 
+  packages/queries: {}
+
   packages/types: {}
 
   packages/ui:
@@ -194,6 +202,14 @@ packages:
       }
     engines: { node: ^22.18.0 || >=24.11.0 }
 
+  '@graphql-typed-document-node/core@3.2.0':
+    resolution:
+      {
+        integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==,
+      }
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+
   '@iconify/types@2.0.0':
     resolution:
       {
@@ -246,6 +262,13 @@ packages:
       {
         integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==,
       }
+
+  '@mondaydotcomorg/api@14.0.0':
+    resolution:
+      {
+        integrity: sha512-crQd8yxyhFZXHfjxN3Zhb7jv6eZ1grMSN9/gOjfZCKQtolTi+u/sfm0o2abioJqdIF66+GPit+yrH4BHHOAnxA==,
+      }
+    engines: { node: '>= 18.0.0' }
 
   '@oxc-project/types@0.144.0':
     resolution:
@@ -732,6 +755,12 @@ packages:
         integrity: sha512-ysOGlgTFbN2/Y6Cg3Iye8YKulHw+R2fNXHrgSmXISQdMnomY6eNDprVdW9R5xBguEqI954+S6709UyiO7B+6OQ==,
       }
 
+  cross-fetch@3.2.0:
+    resolution:
+      {
+        integrity: sha512-Q+xVJLoGOeIMXZmbUK4HYk+69cQH6LudR0Vu/pRm2YlU/hDV9CiS0gKUMaWY5f2NeUH9C1nV3bsTlCo0FsTV1Q==,
+      }
+
   csstype@3.2.3:
     resolution:
       {
@@ -796,6 +825,30 @@ packages:
       {
         integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==,
       }
+
+  graphql-request@6.1.0:
+    resolution:
+      {
+        integrity: sha512-p+XPfS4q7aIpKVcgmnZKhMNqhltk20hfXtkaIkTfjjmiKMJ5xrt5c743cL03y/K7y1rg3WrIC49xGiEQ4mxdNw==,
+      }
+    peerDependencies:
+      graphql: 14 - 16
+
+  graphql-tag@2.12.7:
+    resolution:
+      {
+        integrity: sha512-xnE/NFzy+0eIesvAsREJZ284zTl/wYuBAvpsFSDhRGRdRHdnE90M21Q3xAWyYInb0J756c6x0pIQ62+vtvOs1Q==,
+      }
+    engines: { node: '>=10' }
+    peerDependencies:
+      graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+
+  graphql@16.8.2:
+    resolution:
+      {
+        integrity: sha512-cvVIBILwuoSyD54U4cF/UXDh5yAobhNV/tPygI4lZhgOIJQE/WLWC4waBRb4I6bDVYb3OVx3lfHbaQOEoUD5sg==,
+      }
+    engines: { node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0 }
 
   hookable@5.5.3:
     resolution:
@@ -1086,6 +1139,18 @@ packages:
     engines: { node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1 }
     hasBin: true
 
+  node-fetch@2.7.0:
+    resolution:
+      {
+        integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==,
+      }
+    engines: { node: 4.x || >=6.0.0 }
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+
   nostics@1.2.0:
     resolution:
       {
@@ -1203,6 +1268,18 @@ packages:
         integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==,
       }
     engines: { node: '>=12.0.0' }
+
+  tr46@0.0.3:
+    resolution:
+      {
+        integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==,
+      }
+
+  tslib@2.8.1:
+    resolution:
+      {
+        integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==,
+      }
 
   typescript@6.0.3:
     resolution:
@@ -1360,10 +1437,22 @@ packages:
       typescript:
         optional: true
 
+  webidl-conversions@3.0.1:
+    resolution:
+      {
+        integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==,
+      }
+
   webpack-virtual-modules@0.6.2:
     resolution:
       {
         integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==,
+      }
+
+  whatwg-url@5.0.0:
+    resolution:
+      {
+        integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==,
       }
 
   yaml@2.9.0:
@@ -1373,6 +1462,12 @@ packages:
       }
     engines: { node: '>= 14.6' }
     hasBin: true
+
+  zod@3.24.4:
+    resolution:
+      {
+        integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==,
+      }
 
 snapshots:
   '@babel/generator@8.0.0':
@@ -1410,6 +1505,10 @@ snapshots:
       '@babel/helper-string-parser': 8.0.0
       '@babel/helper-validator-identifier': 8.0.4
 
+  '@graphql-typed-document-node/core@3.2.0(graphql@16.8.2)':
+    dependencies:
+      graphql: 16.8.2
+
   '@iconify/types@2.0.0': {}
 
   '@iconify/vue@4.3.0(vue@3.5.41(typescript@6.0.3))':
@@ -1440,6 +1539,15 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@mondaydotcomorg/api@14.0.0':
+    dependencies:
+      graphql: 16.8.2
+      graphql-request: 6.1.0(graphql@16.8.2)
+      graphql-tag: 2.12.7(graphql@16.8.2)
+      zod: 3.24.4
+    transitivePeerDependencies:
+      - encoding
 
   '@oxc-project/types@0.144.0': {}
 
@@ -1698,6 +1806,12 @@ snapshots:
 
   confbox@0.2.4: {}
 
+  cross-fetch@3.2.0:
+    dependencies:
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
   csstype@3.2.3: {}
 
   detect-libc@2.1.2: {}
@@ -1721,6 +1835,21 @@ snapshots:
     optional: true
 
   graceful-fs@4.2.11: {}
+
+  graphql-request@6.1.0(graphql@16.8.2):
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.2)
+      cross-fetch: 3.2.0
+      graphql: 16.8.2
+    transitivePeerDependencies:
+      - encoding
+
+  graphql-tag@2.12.7(graphql@16.8.2):
+    dependencies:
+      graphql: 16.8.2
+      tslib: 2.8.1
+
+  graphql@16.8.2: {}
 
   hookable@5.5.3: {}
 
@@ -1853,6 +1982,10 @@ snapshots:
 
   nanoid@3.3.18: {}
 
+  node-fetch@2.7.0:
+    dependencies:
+      whatwg-url: 5.0.0
+
   nostics@1.2.0: {}
 
   path-browserify@1.0.1: {}
@@ -1921,6 +2054,10 @@ snapshots:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.5)
       picomatch: 4.0.5
+
+  tr46@0.0.3: {}
+
+  tslib@2.8.1: {}
 
   typescript@6.0.3: {}
 
@@ -2007,6 +2144,15 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
+  webidl-conversions@3.0.1: {}
+
   webpack-virtual-modules@0.6.2: {}
 
+  whatwg-url@5.0.0:
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
+
   yaml@2.9.0: {}
+
+  zod@3.24.4: {}

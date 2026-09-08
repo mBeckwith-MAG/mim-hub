@@ -1,6 +1,11 @@
 <template>
-  <nav :class="{ 'shadow-md shadow-mid border-b border-dark': shadowed }">
-    <div class="title">
+  <nav
+    :class="[
+      'flex justify-between bg-mid items-center z-50',
+      { 'shadow-md shadow-mid border-b border-dark': shadowed },
+    ]"
+  >
+    <div class="text-4xl font-thin">
       <div v-if="$slots.left">
         <slot name="left" />
       </div>

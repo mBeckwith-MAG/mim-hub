@@ -1,11 +1,12 @@
 <template>
-  <div class="relative mt-6">
+  <div class="relative mt-6 w-full">
     <textarea
       :id="`${name}-form-notes`"
-      :disabled="!canEdit"
+      :disabled
+      :placeholder
       v-model="model"
       rows="4"
-      class="peer w-full pt-2x pb-2 px-sm border-b border-brdr text-txt placeholder-transparent focus:outline-none focus:border-sky-500 resize-none overflow-y-auto scrollbar-thin scrollbar-track-light scrollbar-thumb-mid hover:scrollbar-thumb-dark [&::-webkit-scrollbar-corner]:bg-transparent disabled:text-dark dark:disabled:text-faint text-xs"
+      class="peer w-full pt-2x pb-2 px-sm border-b border-brdr text-txt focus:outline-none focus:border-sky-500 resize-none overflow-y-auto scrollbar-thin scrollbar-track-light scrollbar-thumb-mid hover:scrollbar-thumb-dark [&::-webkit-scrollbar-corner]:bg-transparent text-sm"
     ></textarea>
     <label
       :for="`${name}-form-notes`"
@@ -21,10 +22,12 @@ const model = defineModel<string>();
 withDefaults(
   defineProps<{
     name: string;
-    canEdit?: boolean;
+    disabled?: boolean;
+    placeholder?: string;
   }>(),
   {
-    canEdit: false,
+    disabled: false,
+    placeholder: '',
   }
 );
 </script>

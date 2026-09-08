@@ -1,16 +1,16 @@
 <template>
-  <div class="grid grid-rows-2 gap-md p-md">
-    <div
-      :class="['grid lg:grid-cols-2 gap-md', { 'lg:grid-cols-3': showPayoff }]"
-    >
+  <Grid :rows="2" class="gap-md p-md">
+    <Grid :cols="showPayoff ? 3 : 2" class="gap-md">
       <slot name="top-row" />
-    </div>
-    <div class="grid lg:grid-cols-2 gap-md">
+    </Grid>
+    <Grid :cols="2" class="gap-md">
       <slot name="bottom-row" />
-    </div>
-  </div>
+    </Grid>
+  </Grid>
 </template>
 <script setup lang="ts">
+import { Grid } from '@mim-workspace/ui';
+
 defineProps({
   showPayoff: {
     type: Boolean,

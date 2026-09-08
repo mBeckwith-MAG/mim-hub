@@ -12,4 +12,5 @@ export { default as FileUploader } from './FileUploader.vue';
 export { default as FilterBar } from './FilterBar.vue';
 export { default as FormInput } from './FormInput.vue';
 export { default as FormTextarea } from './FormTextarea.vue';
+export { default as ReversalCheckbox } from './ReversalCheckbox.vue';
 export { default as Loading } from './Loading.vue';

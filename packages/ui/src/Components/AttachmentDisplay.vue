@@ -1,11 +1,12 @@
 <template>
-  <a
-    :href="attachment"
-    class="grid gap-sm border border-border rounded-2xl p-lg text-center"
+  <div
+    class="justify-center text-center truncate border border-brdr rounded-2xl hover:border-mid p-sm"
   >
-    <Icon icon="meteor-icons:file" width="2em" />
-    <small>{{ label }}</small>
-  </a>
+    <a :href="attachment">
+      <Icon icon="meteor-icons:file" width="2em" class="w-full" />
+      <small>{{ label }}</small>
+    </a>
+  </div>
 </template>
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
@@ -16,7 +17,6 @@ const props = defineProps<{
 }>();
 
 const label = computed(() => {
-  console.log('attach', props.attachment);
   return props.attachment.split('/').pop();
 });
 </script>
