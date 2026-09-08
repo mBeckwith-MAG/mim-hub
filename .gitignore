@@ -33,7 +33,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.swp
-.VSCodeCounter
+.VSCodeCounter/
 
 # TypeScript build info
 *.tsbuildinfo
