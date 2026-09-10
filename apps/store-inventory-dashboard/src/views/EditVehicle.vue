@@ -21,9 +21,9 @@
     </div>
   </div>
 
-  <div class="grid p-4">
+  <div class="grid p-4 mt-30">
     <div class="grid gap-md">
-      <Grid :cols="hasPayoff ? 3 : 2">
+      <Grid :cols="2">
         <Card>
           <template #title>
             <div class="w-full">BASIC INFORMATION</div>
@@ -76,23 +76,20 @@
         <Card v-if="hasPayoff">
           <template #title>PAYOFF INFORMATION</template>
           <template #body>
-            <Grid :cols="2">
-              <DataDisplay label="Lien Holder" :value="lienHolder || ''" />
+            <Grid :cols="3">
+              <DataDisplay label="Lien Holder" :value="lienHolder || '-'" />
               <DataDisplay
                 label="Payoff Amount"
-                :value="String(payoffAmount) || ''"
+                :value="String(payoffAmount) || '-'"
               />
-              <DataDisplay label="Per Diem" :value="String(perDiem) || ''" />
+              <DataDisplay label="Per Diem" :value="String(perDiem) || '-'" />
               <div v-if="goodTill">
-                <FormInput v-if="canEdit" name="goodTillDate"
-                  >Good Till Date</FormInput
-                >
-                <DataDisplay label="Good Till Date" :value="goodTill || ''" />
+                <DataDisplay label="Good Till Date" :value="goodTill || '-'" />
               </div>
-              <DataDisplay label="Check Status" :value="checkStatus || ''" />
+              <DataDisplay label="Check Status" :value="checkStatus || '-'" />
               <DataDisplay
                 label="Payment Tracking"
-                :value="paymentTracking || ''"
+                :value="paymentTracking || '-'"
               />
             </Grid>
           </template>
@@ -160,12 +157,12 @@
                   >
                     Attachments Preview ({{ attachments.length }})
                   </p>
-                  <FilePreviewList
+                  <!-- <FilePreviewList
                     v-if="attachments.length > 0"
                     :items="attachments"
                     :cols="5"
                     @remove="removeFile"
-                  />
+                  /> -->
                 </div>
                 <div
                   v-else
@@ -186,14 +183,9 @@ import { onMounted, ref, computed, type Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import { InventoryItem } from '@mim-workspace/models';
-import {
-  BASE_URL,
-  BOARDS,
-  Columns
-} from '@mim-workspace/constants';
+import { BASE_URL, BOARDS, Columns } from '@mim-workspace/constants';
 import type { Item, RawFile } from '@mim-workspace/types';
 // import type { Attachment, RawFiles } from '@mim-workspace/types';
-
 
 import {
   Button,
@@ -201,9 +193,8 @@ import {
   Container,
   DateDisplay,
   DataDisplay,
-  FilePreviewList,
+  // FilePreviewList,
   FileUploader,
-  FormInput,
   FormTextarea,
   Grid,
   Navigation,
@@ -238,7 +229,6 @@ const endDate = ref<string | undefined>(undefined);
 const paymentTracking = ref<string | undefined>(undefined);
 const inventoryNotes = ref<string | undefined>(undefined);
 
-const attachments = ref<RawFile[] | null>(null);
 const newTitleOrPayoff = ref<string | undefined>(undefined);
 const newTitleType = ref<string | undefined>(undefined);
 const newLienHolder = ref<string | undefined>(undefined);
@@ -249,9 +239,9 @@ const newNotes = ref<string | undefined>(undefined);
 
 const extendedFiles = ref<RawFile[]>([]);
 
-// const newAttachments = computed(() => {
-//   return extendedFiles.value.map((item) => item.file);
-// });
+const attachments = computed(() => {
+  return extendedFiles.value.map((item) => item.file);
+});
 
 const hasChanged = computed(() => {
   if (
@@ -346,22 +336,6 @@ onMounted(async () => {
   }
 });
 
-// const attachmentList = computed<Attachment[]>(() => {
-//   const files: Array<Attachment> = [];
-//   if (existing_attachments.value && existing_attachments.value.length) {
-//     const parsed: RawFiles = JSON.parse(String(existing_attachments.value));
-
-//     return parsed.files.map((file) => {
-//       return {
-//         url: String(`${BASE_URL}/assets/${file.assetId}`),
-//         name: String(file.name),
-//       };
-//     });
-//   }
-
-//   return files;
-// });
-
 const hasPayoff = computed(() => {
   return titleOrPayoff.value === 'Payoff';
 });
@@ -389,14 +363,14 @@ async function handleUpdate() {
   if (newNotes.value) formData.append('formNotes', newNotes.value);
   formData.append('isReversal', isReversal.value.toString());
 
-  if (attachments.value && attachments.value.length > 0) {
-    for (let i = 0; i < attachments.value.length; i++) {
-      formData.append('attachments', attachments.value[i].file);
-    }
-  }
+  // if (attachments.value && attachments.value.length > 0) {
+  //   for (let i = 0; i < attachments.value.length; i++) {
+  //     formData.append('attachments', attachments.value[i].file);
+  //   }
+  // }
 
   try {
-    const response = await fetch(`${BASE_URL}inventory/update/${UID.value}`, {
+    const response = await fetch(`${BASE_URL}/inventory/update/${UID.value}`, {
       method: 'POST',
       body: formData,
     });
@@ -452,15 +426,15 @@ function handleFilesSelected(newFiles: File[]) {
   });
 }
 
-function removeFile(idToRemove: string) {
-  const index = extendedFiles.value.findIndex((item) => item.id === idToRemove);
-  if (index !== -1) {
-    if (extendedFiles.value[index].preview) {
-      URL.revokeObjectURL(extendedFiles.value[index].preview!);
-    }
-    extendedFiles.value.splice(index, 1);
-  }
-}
+// function removeFile(idToRemove: string) {
+//   const index = extendedFiles.value.findIndex((item) => item.id === idToRemove);
+//   if (index !== -1) {
+//     if (extendedFiles.value[index].preview) {
+//       URL.revokeObjectURL(extendedFiles.value[index].preview!);
+//     }
+//     extendedFiles.value.splice(index, 1);
+//   }
+// }
 
 function clearAttachments() {
   extendedFiles.value.forEach((item) => {

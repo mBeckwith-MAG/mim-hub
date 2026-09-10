@@ -91,7 +91,7 @@
                   disabled
                   :placeholder="item.form_notes?.text || 'No Notes'"
                 >
-                  Notes
+                  <small>NOTES</small>
                 </FormTextarea>
               </div>
               <Container v-if="layoutCols > 1">
@@ -142,7 +142,7 @@
                 disabled
                 :placeholder="item.form_notes?.text || 'No Notes'"
               >
-                Notes
+                <small>NOTES</small>
               </FormTextarea>
             </div>
           </Grid>
@@ -184,9 +184,21 @@
           </div>
         </template>
       </Card>
+      <div v-if="!allItems.length">
+        <Card v-if="hasAvailableItem">
+          <template #title>ACCEPT INCOMMING VEHICLE</template>
+          <template #body>
+            <Button variant="success" outlined @click="claimVehicle"
+              >CLAIM ITEM</Button
+            >
+          </template>
+        </Card>
+        <Card v-else>
+          <template #title>NO VEHICLES AVAILABLE</template>
+        </Card>
+      </div>
     </Grid>
   </Container>
-  {{ hasAvailableItem }}
   <Popup
     v-if="selectedStatus && currentItem"
     :title="selectedStatus"
@@ -228,39 +240,59 @@ import { SeamlessApiClient } from '@mondaydotcomorg/api';
 const client = new SeamlessApiClient();
 const layoutCols = ref(1);
 const allItems = ref<InventoryItem[]>([]);
+const unassignedItems = ref<InventoryItem[] | null>(null);
 const selectedStatus = ref<string | null>(null);
 const confirmationText = ref<string>('');
 const currentItem = ref<InventoryItem | null>(null);
 
-
 onMounted(async () => {
   try {
-    const { data } = await client.request<ItemsPageResponse>(
-      GetAssignedItems,
-      {
-        boardId: [BOARDS.current.id, BOARDS.previous.id, BOARDS.printing.id],
-      }
-    )
-  
+    const { data } = await client.request<ItemsPageResponse>(GetAssignedItems, {
+      boardId: [BOARDS.current.id, BOARDS.previous.id, BOARDS.printing.id],
+    });
+
     if (data) {
-      const boards = data.data.boards
-      allItems.value = boards.flatMap(board => {
-        const items = board.items_page.items
-        return items.map(item => {
-          const specialCols = Object.values(BOARDS).find(col => col.id === Number(item.board.id))?.columns
-          return new InventoryItem(item, { ...Columns, ...specialCols })
-        })
-      })
+      const boards = data.data.boards;
+      allItems.value = boards.flatMap((board) => {
+        const items = board.items_page.items;
+        return items.flatMap((item) => {
+          const specialCols = Object.values(BOARDS).find(
+            (col) => col.id === Number(item.board.id)
+          )?.columns;
+          return new InventoryItem(item, { ...Columns, ...specialCols });
+        });
+      });
     }
-  } catch(err) {
-    console.error("Assigned Items Error:", err)
+  } catch (err) {
+    console.error('Assigned Items Error:', err);
   }
-})
 
-const hasAvailableItem = computed(async () => {
-  await getItem().then(res => console.log(res))
-})
+  try {
+    const { data } = await client.request<ItemsPageResponse>(
+      GetUnassignedItems,
+      { boardId: BOARDS.current.id }
+    );
 
+    if (data) {
+      const boards = data.data.boards;
+      unassignedItems.value = boards.flatMap((board) => {
+        const items = board.items_page.items;
+        return items.map((item) => {
+          return new InventoryItem(item, {
+            ...Columns,
+            ...BOARDS.current.columns,
+          });
+        });
+      });
+    }
+  } catch (err) {
+    console.error('Get Unassigned Error:', err);
+  }
+});
+
+const hasAvailableItem = computed(() => {
+  return unassignedItems.value && unassignedItems.value.length > 0;
+});
 
 const attachmentGridSize = computed(() => {
   switch (layoutCols.value) {
@@ -316,6 +348,10 @@ function selectReject(item: InventoryItem) {
   currentItem.value = item;
 }
 
+function claimVehicle() {
+  // TODO: Write a function to claim the first available unclaimed vehicle
+}
+
 function closePopup() {
   selectedStatus.value = null;
   confirmationText.value = '';
@@ -340,25 +376,6 @@ async function changeStatus(data: ConfirmStatus) {
     }
   } catch (err) {
     console.error('Error Fetching Item Data:', err);
-  }
-}
-
-async function getItem() {
-  try {
-    const { data } = await client.request<ItemsPageResponse>(GetUnassignedItems, { boardId: BOARDS.current.id })
-    
-      if (data) {
-      const boards = data.data.boards
-      return boards.flatMap(board => {
-        const items = board.items_page.items
-        return items.map(item => {
-          const specialCols = Object.values(BOARDS).find(col => col.id === Number(item.board.id))?.columns
-          return new InventoryItem(item, { ...Columns, ...specialCols })
-        })
-      })
-    }
-  } catch(err) {
-    console.error("Get Unassigned Error:", err)
   }
 }
 </script>

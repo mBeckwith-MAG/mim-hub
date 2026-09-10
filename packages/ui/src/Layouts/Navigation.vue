@@ -1,8 +1,8 @@
 <template>
   <nav
     :class="[
-      'flex justify-between bg-mid items-center z-50',
-      { 'shadow-md shadow-mid border-b border-dark': shadowed },
+      'fixed top-0 left-0 right-0 flex justify-between bg-dark items-center z-50',
+      { 'shadowed border-b border-dark': shadowed },
     ]"
   >
     <div class="text-4xl font-thin">

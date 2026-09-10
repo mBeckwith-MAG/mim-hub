@@ -54,10 +54,10 @@
     </template>
     <template #footer>
       <Grid :cols="2" class="w-full">
-        <FormTextarea name="additional" v-model="formNotes"
+        <FormTextarea name="additional" v-model="formNotes" disabled
           >Form Notes</FormTextarea
         >
-        <FormTextarea name="inventory" v-model="inventoryNotes"
+        <FormTextarea name="inventory" v-model="inventoryNotes" disabled
           >Inventory Notes</FormTextarea
         >
         <RouterLink
@@ -116,7 +116,8 @@ const statusBorder = computed(() => {
   const status = props.item.status?.text;
   const base_style = 'border-l-20';
 
-  if (status?.includes('Working')) return `${base_style} border-l-yellow-500`;
+  if (status?.includes('Working') || status?.includes('Updated'))
+    return `${base_style} border-l-yellow-500`;
   if (status?.includes('Reject')) return `${base_style} border-l-red-500`;
   if (status?.includes('Missing')) return `${base_style} border-l-purple-500`;
   if (status?.includes('Done')) return `${base_style} border-l-emerald-500`;

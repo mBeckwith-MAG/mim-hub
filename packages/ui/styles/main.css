@@ -1,22 +1,26 @@
 @import 'tailwindcss';
 
 :root {
-  --faint-color: var(--color-mist-100);
-  --light-color: var(--color-mist-200);
-  --medium-color: var(--color-mist-300);
-  --dark-color: var(--color-mist-400);
-  --default-border-color: var(--color-mist-300);
-  --default-text-color: var(--color-mist-950);
+  --faint-color: var(--color-slate-50);
+  --light-color: var(--color-slate-100);
+  --medium-color: var(--color-slate-200);
+  --dark-color: var(--color-slate-300);
+  --shadow-color: var(--color-slate-400);
+
+  --default-border-color: var(--color-slate-200);
+  --default-text-color: var(--color-slate-950);
 }
 
 @variant dark {
   :root {
-    --faint-color: var(--color-mist-400);
-    --light-color: var(--color-mist-700);
-    --medium-color: var(--color-mist-800);
-    --dark-color: var(--color-mist-900);
-    --default-border-color: var(--color-mist-600);
-    --default-text-color: var(--color-mist-300);
+    --faint-color: #9a9cb4;
+    --light-color: #41415a;
+    --medium-color: #30314e;
+    --dark-color: #191b35;
+    --shadow-color: #191b35;
+
+    --default-border-color: #9a9cb4;
+    --default-text-color: #a1a5bb;
   }
 }
 
@@ -27,6 +31,8 @@
   --color-mid: var(--medium-color);
   --color-dark: var(--dark-color);
   --color-brdr: var(--default-border-color);
+  --color-shdw: var(--shadow-color);
+
   --spacing-xs: calc(var(--spacing) * 0.5);
   --spacing-sm: calc(var(--spacing) * 2);
   --spacing-md: calc(var(--spacing) * 4);
@@ -38,7 +44,7 @@
 @layer base {
   html,
   body {
-    @apply bg-light text-txt [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden;
+    @apply bg-mid text-txt [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden;
   }
 
   input[type='number']::-webkit-outer-spin-button,
@@ -54,5 +60,9 @@
   input[type='checkbox'] {
     @apply appearance-none size-5 border border-light rounded relative bg-white cursor-pointer;
     @apply checked:after:block after:border-white after:content-[''] after:absolute after:hidden after:left-1.5 after:top-0.5 after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:rotate-45;
+  }
+
+  .shadowed {
+    @apply shadow-md shadow-shdw;
   }
 }

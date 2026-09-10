@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
-    <div class="truncate">{{ value }}</div>
     <small>{{ label.toUpperCase() }}</small>
+    <div class="truncate">{{ value }}</div>
   </div>
 </template>
 <script setup lang="ts">

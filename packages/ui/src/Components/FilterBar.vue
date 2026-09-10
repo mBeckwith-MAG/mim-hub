@@ -2,12 +2,12 @@
   <div class="fixed top-30 left-0 right-0 z-40">
     <Container
       :class="[
-        'relative w-full bg-mid z-40 transition-all shadow-md shadow-mid border-b border-dark',
+        'relative w-full bg-dark z-40 transition-all shadowed border-b border-dark',
         styles,
       ]"
     >
       <Grid>
-        <div class="grid grid-cols-4 items-center">
+        <div class="grid grid-cols-4 gap-2x items-center">
           <FormInput
             v-model="searchQuery"
             name="search"
@@ -17,7 +17,9 @@
           >
             <template #default>Search</template>
           </FormInput>
-          <Button variant="secondary" outlined>CLEAR</Button>
+          <Button variant="secondary" outlined @click="clearSearch"
+            >CLEAR</Button
+          >
         </div>
 
         <Grid :cols="5">
@@ -30,7 +32,7 @@
               :name="dropdown.name"
               :options="dropdown.options"
               v-model="filters[dropdown.name]"
-              class="relative after:absolute after:-bottom-2 after:left-0 after:h-lg after:w-full after:bg-light after:rounded-2xl"
+              class="relative z-40 after:absolute after:-bottom-3 after:left-0 after:h-lg after:w-full after:bg-light after:rounded-2xl"
               forceLabel
             >
               <template #default>{{ dropdown.label }}</template>
@@ -88,4 +90,9 @@ const currentIcon = computed(() => {
   }
   return show.value ? 'mdi:chevron-up' : 'mdi:chevron-down';
 });
+
+function clearSearch() {
+  searchQuery.value = '';
+  filters.value = {};
+}
 </script>

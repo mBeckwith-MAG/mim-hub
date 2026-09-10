@@ -6,7 +6,7 @@
     <div class="title">{{ error }}</div>
   </Container>
   <div v-else>
-    <Navigation class="sticky top-0 py-lg px-4 z-50">
+    <Navigation class="py-lg px-4 z-50">
       <template #left>All Inventory</template>
       <template #right>
         <div class="flex justify-end gap-lg items-center">
@@ -47,7 +47,7 @@
       :dropdowns="searchOptions"
       horizontal
     />
-    <Container>
+    <Container class="mt-30">
       <TabContainer :tabs="tabs">
         <template #current="{ item }">
           <ItemCard :item />
@@ -72,7 +72,7 @@ import {
   statusOptions,
   titleOrPayoffOptions,
   usedOriginOptions,
-  Columns
+  Columns,
 } from '@mim-workspace/constants';
 import type { Item } from '@mim-workspace/types';
 import { InventoryItem } from '@mim-workspace/models';

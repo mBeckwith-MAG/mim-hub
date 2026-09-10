@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col border-t border-l border-brdr rounded-2xl p-4 shadow-md shadow-mid h-full w-full"
+    class="flex flex-col bg-light border-t border-l border-mid rounded-2xl p-4 shadowed h-full w-full"
   >
     <div
       v-if="$slots.title"

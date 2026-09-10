@@ -72,20 +72,18 @@ query($boardId: [ID!]) {
         items {
             id
             name
+            board {
+                id
+                name
+            }
+            column_values {
+                id
+                text
+                type
+                value
+            }
         }
     }
-    }
-}`;
-
-export const ChangeStatus = `
-mutation($boardId: ID!, $itemId: ID!, $newStatus: String!) {
-    change_simple_column_value(
-        board_id: $boardId
-        item_id: $itemId
-        column_id: "status"
-        value: $newStatus
-    ) { 
-        id 
     }
 }`;
 

@@ -74,31 +74,31 @@ export interface ItemsPageResponse {
     data: {
       boards: {
         items_page: {
-          items: BoardItem[]
-        }
-      }[]
-    }
-  }
+          items: BoardItem[];
+        };
+      }[];
+    };
+  };
 }
 
 export interface ColumnValues {
-  id: string
-  text: string | null
-  value: string | null
+  id: string;
+  text: string | null;
+  value: string | null;
 }
 
 export interface ItemPageResponse {
   data: {
     data: {
       items: {
-        id: string
-        name: string
+        id: string;
+        name: string;
         board: {
-          id: string
-          name: string
-        }
-        column_values: ColumnValues[]
-      }[]
-    }
-  }
+          id: string;
+          name: string;
+        };
+        column_values: ColumnValues[];
+      }[];
+    };
+  };
 }

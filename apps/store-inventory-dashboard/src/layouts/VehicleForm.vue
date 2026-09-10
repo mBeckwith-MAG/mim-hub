@@ -1,5 +1,5 @@
 <template>
-  <Grid :rows="2" class="gap-md p-md">
+  <Grid :rows="2" class="mt-30 gap-md p-md">
     <Grid :cols="showPayoff ? 3 : 2" class="gap-md">
       <slot name="top-row" />
     </Grid>

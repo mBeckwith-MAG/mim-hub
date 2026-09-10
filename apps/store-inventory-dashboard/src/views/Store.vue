@@ -74,7 +74,7 @@ import {
   statusOptions,
   titleOrPayoffOptions,
   usedOriginOptions,
-  Columns
+  Columns,
 } from '@mim-workspace/constants';
 import type { Item } from '@mim-workspace/types';
 import { InventoryItem } from '@mim-workspace/models';
@@ -168,7 +168,7 @@ onMounted(async () => {
     const previousBoardItems = previousData.items.map((item: Item) => {
       return new InventoryItem(item, {
         ...Columns,
-        ...BOARDS.previous.columns
+        ...BOARDS.previous.columns,
       });
     });
 
@@ -179,7 +179,7 @@ onMounted(async () => {
     const printingBoardItems = printingData.items.map((item: Item) => {
       return new InventoryItem(item, {
         ...Columns,
-        ...BOARDS.printing.columns
+        ...BOARDS.printing.columns,
       });
     });
 
